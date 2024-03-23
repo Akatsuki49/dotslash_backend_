@@ -15,10 +15,10 @@ from deepgram import (
     FileSource,
 )
 os.environ["KMP_DUPLICATE_LIB_OK"]="TRUE"
-API_KEY = os.getenv("OPENAI_API_KEY")
+API_KEY = ""
 text=""
-text1 = transcribe("./test.mp3")
-pdf_reader=PdfReader("./testing.pdf")
+text1 = transcribe("./UE21CS342BA3.mp3")
+pdf_reader=PdfReader("./UE21CS342BA3.pdf")
 for page in pdf_reader.pages:
     text+=page.extract_text()
 # x1 = data[0].page_content
@@ -41,6 +41,6 @@ chunks1 = text_splitter.split_text(text1)
 embeddi = OpenAIEmbeddings(openai_api_key=API_KEY)
 vectorst = FAISS.from_texts(texts=chunks,embedding=embeddi)
 vectorst.add_texts(texts=chunks1)
-vectorst.save_local("db1")
+vectorst.save_local("UE21CS342BA3")
 # print(type(vectorst))
 # print(result['answer'])

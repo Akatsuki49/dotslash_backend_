@@ -8,7 +8,7 @@ from deepgram import (
     FileSource,
 )
 
-def transcribe(audiof="./test.mp3"):
+def transcribe(audiof):
 
     load_dotenv()
 

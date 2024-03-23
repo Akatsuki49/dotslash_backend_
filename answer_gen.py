@@ -7,9 +7,9 @@ from langchain.embeddings import OpenAIEmbeddings
 import numpy as np
 from langchain.vectorstores import FAISS
 
-API_KEY=os.getenv("OPENAI_API_KEY")
+API_KEY= ''
 embed1 = OpenAIEmbeddings(openai_api_key=API_KEY)
-vs = FAISS.load_local('db1',embeddings=embed1)
+vs = FAISS.load_local('UE21CS351B',embeddings=embed1)
 # ind = faiss.read_index("./db1/index.faiss")
 # vs = FaissVectorStore(ind)
 llm = ChatOpenAI(openai_api_key=API_KEY)
