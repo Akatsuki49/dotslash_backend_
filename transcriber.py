@@ -8,28 +8,31 @@ from deepgram import (
     FileSource,
 )
 
-load_dotenv()
+def transcribe(audiof="./test.mp3"):
 
-AUDIO_FILE = "test.mp3"
+    load_dotenv()
 
-API_KEY = "135b47d20ff4581e9581149b1ad38eb65e12ddd7"
+    AUDIO_FILE = audiof
 
-deepgram = DeepgramClient(API_KEY)
+    API_KEY = "135b47d20ff4581e9581149b1ad38eb65e12ddd7"
 
-with open(AUDIO_FILE, "rb") as file:
-    buffer_data = file.read()
+    deepgram = DeepgramClient(API_KEY)
 
-payload: FileSource = {
-    "buffer": buffer_data,
-}
+    with open(AUDIO_FILE, "rb") as file:
+        buffer_data = file.read()
 
-options = PrerecordedOptions(
-    model="nova-2",
-    smart_format=True,
-)
+    payload: FileSource = {
+        "buffer": buffer_data,
+    }
 
-response = deepgram.listen.prerecorded.v("1").transcribe_file(payload, options)
+    options = PrerecordedOptions(
+        model="nova-2",
+        smart_format=True,
+    )
+
+    response = deepgram.listen.prerecorded.v("1").transcribe_file(payload, options)
 
 
-transcribed = response["results"]["channels"][0]["alternatives"][0]["transcript"]
+    transcribed = response["results"]["channels"][0]["alternatives"][0]["transcript"]
+    return transcribed
 # print(transcribed)
