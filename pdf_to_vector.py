@@ -2,12 +2,10 @@ from langchain_community.document_loaders import PDFMinerLoader
 from langchain.text_splitter import CharacterTextSplitter
 from langchain.embeddings import OpenAIEmbeddings,HuggingFaceInstructEmbeddings
 import torch
-from langchain_community.document_loaders import PDFMinerLoader
+# from langchain_community.document_loaders import PDFMinerLoader
 from langchain.vectorstores import Chroma,FAISS
 from langchain.chat_models import ChatOpenAI
 from PyPDF2 import PdfReader
-from langchain.memory import ConversationBufferMemory
-from langchain.chains import ConversationalRetrievalChain
 import os
 from dotenv import load_dotenv
 from transcriber import transcribe
@@ -43,13 +41,6 @@ chunks1 = text_splitter.split_text(text1)
 embeddi = OpenAIEmbeddings(openai_api_key=API_KEY)
 vectorst = FAISS.from_texts(texts=chunks,embedding=embeddi)
 vectorst.add_texts(texts=chunks1)
-llm = ChatOpenAI(openai_api_key=API_KEY)
-memory = ConversationBufferMemory(
-    memory_key='chat_history', return_messages=True)
-conversation_chain = ConversationalRetrievalChain.from_llm(
-    llm=llm,
-    retriever=vectorst.as_retriever(),
-    memory=memory
-)
-result = conversation_chain({"question":"What is REST?"})['answer']
+vectorst.save_local("db1")
+# print(type(vectorst))
 # print(result['answer'])
