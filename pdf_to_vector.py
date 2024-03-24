@@ -1,7 +1,7 @@
 from langchain_community.document_loaders import PDFMinerLoader
 from langchain.text_splitter import CharacterTextSplitter
 from langchain.embeddings import OpenAIEmbeddings,HuggingFaceInstructEmbeddings
-import torch
+# import torch
 # from langchain_community.document_loaders import PDFMinerLoader
 from langchain.vectorstores import Chroma,FAISS
 from langchain.chat_models import ChatOpenAI
@@ -17,8 +17,10 @@ from deepgram import (
 os.environ["KMP_DUPLICATE_LIB_OK"]="TRUE"
 API_KEY = ""
 text=""
-text1 = transcribe("./UE21CS342BA3.mp3")
-pdf_reader=PdfReader("./UE21CS342BA3.pdf")
+text2 = transcribe("./UE21CS351B.mp3")
+list1=[]
+text1 = "The Speaker says everything which follows:"+text2
+pdf_reader=PdfReader("./UE21CS351B.pdf")
 for page in pdf_reader.pages:
     text+=page.extract_text()
 # x1 = data[0].page_content
@@ -41,6 +43,6 @@ chunks1 = text_splitter.split_text(text1)
 embeddi = OpenAIEmbeddings(openai_api_key=API_KEY)
 vectorst = FAISS.from_texts(texts=chunks,embedding=embeddi)
 vectorst.add_texts(texts=chunks1)
-vectorst.save_local("UE21CS342BA3")
+vectorst.save_local("UE21CS351B")
 # print(type(vectorst))
 # print(result['answer'])
