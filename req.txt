@@ -1,0 +1,13 @@
+openai==0.27.6 
+langchain_community 
+langchain==0.0.184 
+pdfminer.six 
+chromadb 
+InstructorEmbedding==1.0.1 
+sentence_transformers 
+unstructured 
+faiss-cpu 
+pandas 
+transformers 
+torch 
+tiktoken==0.4.0
